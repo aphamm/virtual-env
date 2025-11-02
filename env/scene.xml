@@ -4,7 +4,7 @@
     <visual>
         <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
         <rgba haze="0.15 0.25 0.35 1" />
-        <global azimuth="160" elevation="-20" />
+        <global azimuth="160" elevation="-20" offwidth="1920" offheight="1080" />
     </visual>
 
     <asset>
@@ -19,6 +19,58 @@
 
     <worldbody>
         <light pos="0 0 3.5" dir="0 0 -1" directional="true" />
-        <geom name="floor" size="0 0 0.05" pos="0 0 0" type="plane" material="groundplane" />
+        <!-- Camera positioned level to view the entire robot arm, cube, and box -->
+        <!-- Position: centered on X, further back on Y, at arm working height on Z -->
+        <!-- Looking horizontally toward the origin where robot base is -->
+        <camera name="closeup" pos="0.4 -0.5 0.6" xyaxes="2.0 0.9 0 0.5 1.2 0.7" fovy="45"/>
+        <geom name="floor" size="0 0 0.05" pos="0 0 0" type="plane" material="groundplane" 
+              contype="1" conaffinity="1"/>
+        
+        <!-- Red cube to be picked up (smaller size, physics enabled, obeys gravity) -->
+        <body name="red_cube" pos="0.25 0.0 0.05">
+            <!-- Free joint for 6 DoF movement (3 translation + 3 rotation) - allows gravity -->
+            <freejoint/>
+            <!-- Inertial properties: cube side = 0.02m (0.01*2), mass = 0.01kg -->
+            <!-- For a cube: I = (1/6) * m * s^2 where s is side length -->
+            <inertial pos="0 0 0" mass="0.01" 
+                      diaginertia="0.000000667 0.000000667 0.000000667"/>
+            <!-- Collision and visual geometry -->
+            <geom name="red_cube_geom" type="box" size="0.01 0.01 0.01" 
+                  rgba="1 0 0 1" 
+                  contype="1" conaffinity="1"
+                  friction="1 0.005 0.0001"/>
+        </body>
+        
+        <!-- Blue box container (fixed, open top, physics enabled) -->
+        <body name="blue_box" pos="0.3 -0.2 0.0">
+            <!-- Fixed to ground, no joint needed -->
+            <!-- Container dimensions: 0.16 x 0.16 x 0.1 m (width x depth x height) -->
+            <!-- Bottom of container -->
+            <geom name="blue_box_bottom" type="box" size="0.08 0.08 0.005" pos="0 0 0.005" 
+                  rgba="0 0 1 1" 
+                  contype="1" conaffinity="1"
+                  friction="1 0.005 0.0001"/>
+            <!-- Front wall (positive Y direction) -->
+            <geom name="blue_box_front" type="box" size="0.08 0.005 0.05" pos="0 0.08 0.05" 
+                  rgba="0 0 1 1" 
+                  contype="1" conaffinity="1"
+                  friction="1 0.005 0.0001"/>
+            <!-- Back wall (negative Y direction) -->
+            <geom name="blue_box_back" type="box" size="0.08 0.005 0.05" pos="0 -0.08 0.05" 
+                  rgba="0 0 1 1" 
+                  contype="1" conaffinity="1"
+                  friction="1 0.005 0.0001"/>
+            <!-- Right wall (positive X direction) -->
+            <geom name="blue_box_right" type="box" size="0.005 0.08 0.05" pos="0.08 0 0.05" 
+                  rgba="0 0 1 1" 
+                  contype="1" conaffinity="1"
+                  friction="1 0.005 0.0001"/>
+            <!-- Left wall (negative X direction) -->
+            <geom name="blue_box_left" type="box" size="0.005 0.08 0.05" pos="-0.08 0 0.05" 
+                  rgba="0 0 1 1" 
+                  contype="1" conaffinity="1"
+                  friction="1 0.005 0.0001"/>
+            <!-- Note: Top is open - no geom for the top -->
+        </body>
     </worldbody>
 </mujoco>

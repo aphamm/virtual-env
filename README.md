@@ -1,15 +1,15 @@
 # 🤖 MuJoCo Robot Arm Simulation with RL
 
 ## 🎯 Goal
-Create a MuJoCo simulation where a **LeRobot SO-101 Arm** grabs a **red box** and drops it into a **blue box**, then train a neural network controller using reinforcement learning.
+Create a MuJoCo simulation where a **LeRobot SO-101 Arm** grabs a **red cube** and drops it into a **blue box**, then train a neural network controller using reinforcement learning.
 
 ## 📋 Project Phases
 
 ### Phase 1: 🧪 Manual Control & Feasibility Testing
-- [ ] Create MuJoCo scene with SO-101 arm, red ball, and blue box
+- [ ] Create MuJoCo scene with SO-101 arm, red cube, and blue box
 - [ ] Ensure proper physics (collision detection, no interpenetration)
 - [ ] Build manual control interface
-- [ ] Test if task is achievable manually (grab ball → drop in box)
+- [ ] Test if task is achievable manually (grab cube → drop in box)
 
 ### Phase 2: 🧠 Basic Neural Network Controller
 - [ ] Design input/output interface to MuJoCo simulator
@@ -43,10 +43,6 @@ virtual-env/
 - **Policy Model**: Custom MLP → Octo
 
 ## 🔄 How to Reproduce
-
-### Prerequisites
-- Python 3.8+
-- MuJoCo (follow [official installation guide](https://mujoco.readthedocs.io/en/latest/programming/index.html))
 
 ### Setup
 
