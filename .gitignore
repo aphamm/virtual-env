@@ -1,4 +1,33 @@
+# macOS system files
 .DS_Store
 
-*.mp4
-*.ipynb
+# Output files
+output/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VSCode settings
+.vscode/
+
+# Python egg info
+*.egg-info/
+dist/
+build/
+
+# Log files
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local Python environment
+pip-selfcheck.json
+
