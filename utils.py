@@ -33,6 +33,9 @@ def load_model():
 
 
 def save_video(frames, output_name):
+    # Ensure output directory exists
+    OUTPUT_PATH.mkdir(exist_ok=True)
+
     # Create animation - remove borders
     fig, ax = plt.subplots(figsize=(WIDTH / 100, HEIGHT / 100), dpi=100)
     ax.set_xlim(0, WIDTH)
